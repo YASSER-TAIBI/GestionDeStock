@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
+//@Entity
 @Table(name = "article")
 public class Article extends AbstractEntity {
 
@@ -34,7 +34,7 @@ public class Article extends AbstractEntity {
     @Column(name = "photo")
     private String photo;
 
-    @ManyToOne  // Many articles to One category
+   /** @ManyToOne  // Many articles to One category
     @JoinColumn(name = "idcategory")
-    private Category category;
+    private Category category;**/
 }

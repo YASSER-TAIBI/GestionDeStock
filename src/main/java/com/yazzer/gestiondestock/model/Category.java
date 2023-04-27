@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
+//@Entity
 @Table(name = "category")
 public class Category extends AbstractEntity {
 
@@ -25,6 +25,6 @@ public class Category extends AbstractEntity {
     @Column(name = "designation")
     private String designation;
 
-    @OneToMany(mappedBy = "category")  // One category to Many articles
-    private List<Article> articles;
+   /** @OneToMany(mappedBy = "category")  // One category to Many articles
+    private List<Article> articles;**/
 }

@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -25,7 +22,8 @@ public class Client extends AbstractEntity {
     @Column(name = "prenom")
     private String prenom;
 
-    // private Adresse adresse;
+   /** @Embedded
+    private Adresse adresse;**/
 
     @Column(name = "photo")
     private String photo;
@@ -36,6 +34,6 @@ public class Client extends AbstractEntity {
     @Column(name = "numTel")
     private String numTel;
 
-    @OneToMany(mappedBy = "client")
-    private List<CommandeClient> commandeClients;
+  /**  @OneToMany(mappedBy = "client")
+    private List<CommandeClient> commandeClients;**/
 }
