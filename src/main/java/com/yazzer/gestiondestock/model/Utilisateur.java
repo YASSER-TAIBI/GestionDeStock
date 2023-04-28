@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @Table(name = "utilisateur")
 public class Utilisateur extends AbstractEntity{
 
@@ -32,16 +32,16 @@ public class Utilisateur extends AbstractEntity{
     @Column(name="motdepasse")
     private String moteDePasse;
 
-   /** @Embedded
-    private Adresse adresse;**/
+    @Embedded
+    private Adresse adresse;
 
     @Column(name = "photo")
     private String photo;
 
-   /** @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "identreprise")
     private Entreprise entreprise;
 
     @OneToMany (mappedBy = "utilisateur")
-    private List<Roles> roles;**/
+    private List<Roles> roles;
 }

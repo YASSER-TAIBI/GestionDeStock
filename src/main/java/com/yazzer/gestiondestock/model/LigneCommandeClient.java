@@ -12,18 +12,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @Table(name = "lignecommandeclient")
 public class LigneCommandeClient extends AbstractEntity {
 
 
-    /**@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "idacticle")
     private Article article;
 
     @ManyToOne
     @JoinColumn(name = "idcommandeclient")
-    private CommandeClient commandeClient;**/
+    private CommandeClient commandeClient;
 
     @Column(name = "quantite")
     private BigDecimal quantite;

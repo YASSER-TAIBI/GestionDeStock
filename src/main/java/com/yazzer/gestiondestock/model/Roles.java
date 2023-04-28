@@ -11,14 +11,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @Table(name = "roles")
 public class Roles extends AbstractEntity {
 
     @Column(name = "rolename")
     private String roleName;
 
-    /**@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "idutilisateur")
-    private Utilisateur utilisateur;**/
+    private Utilisateur utilisateur;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @Table(name = "commandefournisseur")
 public class CommandeFournisseur extends AbstractEntity {
 
@@ -23,10 +23,10 @@ public class CommandeFournisseur extends AbstractEntity {
     @Column(name = "datecommande")
     private Instant dateCommande;
 
-    /**@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "idFournisseur")
     private Fournisseur fournisseur;
 
     @OneToMany (mappedBy = "commandeFournisseur")
-    private List<LigneCommandeFournisseur> ligneCommandeFournisseur;**/
+    private List<LigneCommandeFournisseur> ligneCommandeFournisseur;
 }

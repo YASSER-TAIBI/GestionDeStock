@@ -13,7 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @Table(name = "mvtStk")
 public class MvtStk extends AbstractEntity {
 
@@ -23,9 +23,9 @@ public class MvtStk extends AbstractEntity {
     @Column(name = "quantite")
     private BigDecimal quantite;
 
-   /** @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "idarticle")
-    private Article article;**/
+    private Article article;
 
     @Column(name = "typemvt")
     private TypeMvtStk typeMvt;

@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @Table(name = "entreprise")
 public class Entreprise extends AbstractEntity {
 
@@ -22,8 +22,8 @@ public class Entreprise extends AbstractEntity {
     @Column(name="description")
     private String description;
 
-   /** @Embedded
-    private Adresse adresse;**/
+    @Embedded
+    private Adresse adresse;
 
     @Column(name = "codefiscal")
     private String codeFiscal;
@@ -40,7 +40,7 @@ public class Entreprise extends AbstractEntity {
     @Column(name = "siteweb")
     private String steWeb;
 
-    /**@OneToMany(mappedBy = "entreprise")
-    private List<Utilisateur> utilisateurs;**/
+    @OneToMany(mappedBy = "entreprise")
+    private List<Utilisateur> utilisateurs;
 
 }
