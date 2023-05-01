@@ -1,5 +1,7 @@
 package com.yazzer.gestiondestock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yazzer.gestiondestock.model.Category;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,5 +17,32 @@ public class CategoryDto {
 
     private String designation;
 
+    @JsonIgnore
     private List<ArticleDto> articles;
+
+    public static CategoryDto fromEntity (Category category) {
+        if (category == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        return CategoryDto.builder()
+                .id (category.getId())
+                .code(category.getCode())
+                .designation (category.getDesignation())
+                .build();
+    }
+    public static Category toEntity (CategoryDto categoryDto) {
+        if (categoryDto == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        Category category = new Category();
+        category.setId(categoryDto.getId());
+        category.setCode(categoryDto.getCode());
+        category.setDesignation(categoryDto.getDesignation());
+
+        return category;
+    }
 }

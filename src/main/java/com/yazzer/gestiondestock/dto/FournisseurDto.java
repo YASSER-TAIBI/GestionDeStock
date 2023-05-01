@@ -1,5 +1,7 @@
 package com.yazzer.gestiondestock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yazzer.gestiondestock.model.Fournisseur;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,5 +25,40 @@ public class FournisseurDto {
 
     private String numTel;
 
+    @JsonIgnore
     private List<CommandeFournisseurDto> commandeFournisseur;
+
+
+    public static FournisseurDto fromEntity(Fournisseur fournisseur) {
+        if (fournisseur == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        return FournisseurDto.builder()
+                .id (fournisseur.getId())
+                .nom (fournisseur.getNom())
+                .prenom (fournisseur.getPrenom())
+                .adresse (AdresseDto.fromEntity(fournisseur.getAdresse()))
+                .photo (fournisseur.getPhoto())
+                .mail (fournisseur.getMail())
+                .numTel (fournisseur.getNumTel())
+                .build();
+    }
+    public static Fournisseur toEntity (FournisseurDto fournisseurDto) {
+        if (fournisseurDto == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        Fournisseur fournisseur = new Fournisseur();
+        fournisseur.setId(fournisseurDto.getId());
+        fournisseur.setNom(fournisseurDto.getNom());
+        fournisseur.setPrenom(fournisseurDto.getPrenom());
+        fournisseur.setAdresse(AdresseDto.toEntity(fournisseurDto.getAdresse()));
+        fournisseur.setPhoto(fournisseurDto.getPhoto());
+        fournisseur.setMail(fournisseurDto.getMail());
+        fournisseur.setNumTel(fournisseurDto.getNumTel());
+        return fournisseur;
+    }
 }
