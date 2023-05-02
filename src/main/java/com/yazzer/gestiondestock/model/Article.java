@@ -34,4 +34,7 @@ public class Article extends AbstractEntity {
     @ManyToOne  // Many articles to One category
     @JoinColumn(name = "idcategory")
     private Category category;
+
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
 }

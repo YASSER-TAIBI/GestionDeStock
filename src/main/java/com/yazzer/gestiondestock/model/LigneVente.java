@@ -22,4 +22,7 @@ public class LigneVente extends AbstractEntity {
 
     @Column(name = "pixunitaire")
     private BigDecimal prixUnitaire;
+
+    @Column(name = "identreprise")
+    private Integer idEntreprise;
 }
