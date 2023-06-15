@@ -1,6 +1,5 @@
 package com.yazzer.gestiondestock.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yazzer.gestiondestock.model.CommandeClient;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,8 @@ public class CommandeClientDto {
 
     private ClientDto client;
 
-    @JsonIgnore
+    private Integer idEntreprise;
+
     private List<LigneCommandeClientDto> ligneCommandeClients;
 
 
@@ -33,6 +33,7 @@ public class CommandeClientDto {
         return CommandeClientDto.builder()
                 .id (commandeClient.getId())
                 .code (commandeClient.getCode())
+                .idEntreprise(commandeClient.getIdEntreprise())
                 .dateCommande (commandeClient.getDateCommande())
                 .client (ClientDto.fromEntity(commandeClient.getClient()))
                 .build();
@@ -46,8 +47,8 @@ public class CommandeClientDto {
         CommandeClient commandeClient = new CommandeClient();
         commandeClient.setId(commandeClientDto.getId());
         commandeClient.setCode(commandeClientDto.getCode());
+        commandeClient.setIdEntreprise(commandeClientDto.getIdEntreprise());
         commandeClient.setDateCommande(commandeClientDto.getDateCommande());
-        commandeClient.setClient(ClientDto.toEntity(commandeClientDto.getClient()));
 
         return commandeClient;
     }

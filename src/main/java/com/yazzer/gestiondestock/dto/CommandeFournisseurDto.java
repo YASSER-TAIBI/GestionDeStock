@@ -19,8 +19,9 @@ public class CommandeFournisseurDto {
 
     private FournisseurDto fournisseur;
 
-    @JsonIgnore
-    private List<LigneCommandeFournisseurDto> ligneCommandeFournisseur;
+    private Integer idEntreprise;
+
+    private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs;
 
 
     public static CommandeFournisseurDto fromEntity(CommandeFournisseur commandeFournisseur) {
@@ -32,6 +33,7 @@ public class CommandeFournisseurDto {
         return CommandeFournisseurDto.builder()
                 .id (commandeFournisseur.getId())
                 .code (commandeFournisseur.getCode())
+                .idEntreprise(commandeFournisseur.getIdEntreprise())
                 .dateCommande (commandeFournisseur.getDateCommande())
                 .fournisseur (FournisseurDto.fromEntity(commandeFournisseur.getFournisseur()))
                 .build();
@@ -45,6 +47,7 @@ public class CommandeFournisseurDto {
         CommandeFournisseur commandeFournisseur = new CommandeFournisseur();
         commandeFournisseur.setId(commandeFournisseurDto.getId());
         commandeFournisseur.setCode(commandeFournisseurDto.getCode());
+        commandeFournisseur.setIdEntreprise(commandeFournisseurDto.getIdEntreprise());
         commandeFournisseur.setDateCommande(commandeFournisseurDto.getDateCommande());
         commandeFournisseur.setFournisseur(FournisseurDto.toEntity(commandeFournisseurDto.getFournisseur()));
 
