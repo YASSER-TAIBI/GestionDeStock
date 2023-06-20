@@ -37,9 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
             throw new InvalidEntityException("L'article n'est pas valide", ErrorCodes.ARTICLE_NOT_VALID, errors);
         }
 
-        Article savedArticle = articleRepository.save(ArticleDto.toEntity(dto));
-
-        return ArticleDto.fromEntity(savedArticle);
+        return ArticleDto.fromEntity(articleRepository.save(ArticleDto.toEntity(dto)));
     }
 
     @Override
