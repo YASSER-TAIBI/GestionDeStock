@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 public class UtilisateurController implements UtilisateurApi {
 
-
     private UtilisateurService utilisateurService;
 
     //Constructor Injection

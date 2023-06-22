@@ -1,28 +1,26 @@
 package com.yazzer.gestiondestock.controller.api;
 
 import com.yazzer.gestiondestock.dto.UtilisateurDto;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.yazzer.gestiondestock.utils.Constants.APP_ROOT;
+import static com.yazzer.gestiondestock.utils.Constants.UTILISATEUR_ENDPOINT;
 
+@Api(UTILISATEUR_ENDPOINT)
 public interface UtilisateurApi {
 
 
-    @PostMapping(value = APP_ROOT + "/utilisateur/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UtilisateurDto save (UtilisateurDto dto);
+    @PostMapping(UTILISATEUR_ENDPOINT + "/create")
+    UtilisateurDto save (@RequestBody UtilisateurDto dto);
 
-    @GetMapping(value = APP_ROOT + "/utilisateur/{idUtilisateur}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(UTILISATEUR_ENDPOINT + "/{idUtilisateur}")
     UtilisateurDto findById(@PathVariable("idUtilisateur") Integer id);
 
-    @GetMapping(value = APP_ROOT + "/utilisateur/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(UTILISATEUR_ENDPOINT + "/all")
     List<UtilisateurDto> findALL();
 
-    @DeleteMapping(value = APP_ROOT + "/utilisateur/delete/{idUtilisateur}")
+    @DeleteMapping(UTILISATEUR_ENDPOINT + "/delete/{idUtilisateur}")
     void delete(@PathVariable("idUtilisateur") Integer id);
 }
