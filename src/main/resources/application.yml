@@ -8,16 +8,19 @@ spring:
   jpa:
     database: MYSQL
     show-sql: true
-# Hibernate DDL Auto (create, create-drop, update)
-    hibernate:
-      ddl-auto: create
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-  #Use this to befriend spring-boot-starter-actuator & springfox-boot-starter
+        ejb:
+          interceptor: com.yazzer.gestiondestock.interceptor.interceptor
+# Hibernate DDL Auto (create, create-drop, update)
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+# Use this to befriend spring-boot-starter-actuator & springfox-boot-starter
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+
 server:
   port: 8081
 

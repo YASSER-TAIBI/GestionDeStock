@@ -19,17 +19,15 @@ public class AbstractEntity implements Serializable {
     @GeneratedValue
     private Integer id;
 
-    //@CreatedDate
-    @Column(name = "creationDate") // nullable: il faut pas que cette date soit nul
-   // @JsonIgnore // Je n'ai pas besoin de cet attribut lorsque j'invoque mon API => c'est un attribut technique
+    @CreatedDate
+    @Column(name = "creationDate", nullable = false, updatable = false) // nullable: il faut pas que cette date soit nul  // updatable: pour dire à Spring je ne veux pas le mettre à jour cette attribut "creationDate"
     private Instant creationDate;
 
-    //@LastModifiedDate
+    @LastModifiedDate
     @Column(name = "lastModifiedDate")
- //   @JsonIgnore
     private Instant lastModifiedDate;
 
-    @PrePersist
+   /* @PrePersist
     void prePersist(){
         creationDate = Instant.now();
     }
@@ -37,5 +35,5 @@ public class AbstractEntity implements Serializable {
     @PreUpdate
     void preUpdate(){
         lastModifiedDate = Instant.now();
-    }
+    }*/
 }
