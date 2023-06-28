@@ -10,4 +10,5 @@ public interface UtilisateurService {
     UtilisateurDto findById(Integer id);
     List<UtilisateurDto> findALL();
     void delete(Integer id);
+    UtilisateurDto findByEmail (String email);
 }

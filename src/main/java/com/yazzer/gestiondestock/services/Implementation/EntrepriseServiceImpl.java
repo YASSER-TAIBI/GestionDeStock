@@ -2,6 +2,8 @@ package com.yazzer.gestiondestock.services.Implementation;
 
 import com.yazzer.gestiondestock.dto.ArticleDto;
 import com.yazzer.gestiondestock.dto.EntrepriseDto;
+import com.yazzer.gestiondestock.dto.RolesDto;
+import com.yazzer.gestiondestock.dto.UtilisateurDto;
 import com.yazzer.gestiondestock.exception.EntityNotFoundException;
 import com.yazzer.gestiondestock.exception.ErrorCodes;
 import com.yazzer.gestiondestock.exception.InvalidEntityException;
@@ -9,13 +11,16 @@ import com.yazzer.gestiondestock.model.Article;
 import com.yazzer.gestiondestock.model.Entreprise;
 import com.yazzer.gestiondestock.repository.ArticleRepository;
 import com.yazzer.gestiondestock.repository.EntrepriseRepository;
+import com.yazzer.gestiondestock.repository.RolesRepository;
 import com.yazzer.gestiondestock.services.EntrepriseService;
+import com.yazzer.gestiondestock.services.UtilisateurService;
 import com.yazzer.gestiondestock.validator.ArticleValidator;
 import com.yazzer.gestiondestock.validator.EntrepriseValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,11 +30,15 @@ import java.util.stream.Collectors;
 public class EntrepriseServiceImpl implements EntrepriseService {
 
     private EntrepriseRepository entrepriseRepository;
+    private UtilisateurService utilisateurService;
+    private RolesRepository rolesRepository;
+
     @Autowired
     public EntrepriseServiceImpl(
-            EntrepriseRepository entrepriseRepository
-    ) {
+            EntrepriseRepository entrepriseRepository) {
         this.entrepriseRepository = entrepriseRepository;
+        this.utilisateurService = utilisateurService;
+        this.rolesRepository = rolesRepository;
     }
 
     @Override
@@ -40,9 +49,37 @@ public class EntrepriseServiceImpl implements EntrepriseService {
             throw new InvalidEntityException("L'entreprise n'est pas valide", ErrorCodes.ENTREPRISE_NOT_VALID, errors);
         }
 
-        Entreprise savedEntreprise = entrepriseRepository.save(EntrepriseDto.toEntity(dto));
+        EntrepriseDto savedEntreprise = EntrepriseDto.fromEntity(entrepriseRepository.save(EntrepriseDto.toEntity(dto)));
 
-        return EntrepriseDto.fromEntity(savedEntreprise);
+        UtilisateurDto utilisateur = fromEntreprise(savedEntreprise);
+
+        UtilisateurDto savedUser = utilisateurService.save(utilisateur);
+
+        RolesDto rolesDto = RolesDto.builder()
+                .roleName("ADMIN")
+                .utilisateur(savedUser)
+                .build();
+
+        rolesRepository.save(RolesDto.toEntity(rolesDto));
+
+        return savedEntreprise;
+    }
+
+    private UtilisateurDto fromEntreprise (EntrepriseDto dto) {
+        return UtilisateurDto.builder()
+            .adresse(dto.getAdresse())
+            .nom (dto.getNom())
+            .prenom (dto.getCodeFiscal())
+            .email(dto.getEmail())
+            .moteDePasse (generateRandomPassword())
+            .entreprise(dto)
+            .dateDeNaissance (Instant.now())
+            .photo(dto.getPhoto())
+            .build();
+    }
+
+    private String generateRandomPassword(){
+        return "Yt#19#P@$$w0rD";
     }
 
     @Override
