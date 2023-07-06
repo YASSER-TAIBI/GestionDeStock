@@ -14,6 +14,7 @@ import static com.yazzer.gestiondestock.utils.Constants.APP_ROOT;
 
 @Api(APP_ROOT + "/articles")
 public interface ArticleApi {
+	
     @PostMapping(value = APP_ROOT + "/articles/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un article", notes = "Cette methode permet d'enregistrer ou modifier un article", response = ArticleDto.class)
     @ApiResponses(value = {

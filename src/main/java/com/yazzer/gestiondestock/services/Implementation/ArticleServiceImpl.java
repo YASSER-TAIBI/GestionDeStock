@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
+    
     @Autowired
     public ArticleServiceImpl(
             ArticleRepository articleRepository

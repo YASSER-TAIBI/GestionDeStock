@@ -22,6 +22,7 @@ class CategoryServiceImplTest {
 
     @Test
     public void shouldSaveCategoryWithSuccess() {
+    	
         CategoryDto expectedCategory = CategoryDto.builder()
                 .code("Cat test")
                 .designation("Designation test")
