@@ -63,8 +63,11 @@ public class VentesServiceImpl implements VentesService {
         log.error("One or more articles were not found in the DB, ", errors);
         throw new InvalidEntityException("Un ou plusieurs articles n'ont pas ete trouve dans la BDD", ErrorCodes. VENTE_NOT_VALID, errors);
         }
-                Ventes savedVentes = ventesRepository.save(VentesDto.toEntity(dto));
+        
+     // Charger Ventes --> DB
+        Ventes savedVentes = ventesRepository.save(VentesDto.toEntity(dto));
 
+     // Charger LigneVentes --> DB
         dto.getLigneVentes ().forEach (ligneVenteDto -> {
             LigneVente ligneVente = LigneVenteDto.toEntity (ligneVenteDto);
             ligneVente.setVente(savedVentes);

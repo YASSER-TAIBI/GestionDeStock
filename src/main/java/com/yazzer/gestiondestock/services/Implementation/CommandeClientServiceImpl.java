@@ -50,7 +50,9 @@ public class CommandeClientServiceImpl implements CommandeClientService {
 
     @Override
     public CommandeClientDto save(CommandeClientDto dto) {
+    	
         List<String> errors = CommandeClientValidator.validate(dto);
+        
         if (!errors.isEmpty()) {
             log.error("Commande Client is not valide", dto);
             throw new InvalidEntityException("La Commande Client n'est pas valide", ErrorCodes.COMMANDE_CLIENT_NOT_VALID, errors);
@@ -81,8 +83,10 @@ public class CommandeClientServiceImpl implements CommandeClientService {
             throw new InvalidEntityException("Article n'existe pas dans la BDD", ErrorCodes.ARTICLE_NOT_FOUND, articleErrors);
         }
 
+        // Charger CommandeClient --> DB
         CommandeClient savedCmdClt = commandeClientRepository.save(CommandeClientDto.toEntity(dto));
 
+        // Charger LigneCommandeClients --> DB
             if (dto.getLigneCommandeClients() != null) {
                 dto.getLigneCommandeClients().forEach(ligCmdclt -> {
                     LigneCommandeClient ligneCommandeClient = LigneCommandeClientDto.toEntity(ligCmdclt);

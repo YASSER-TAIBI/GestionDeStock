@@ -18,13 +18,17 @@ import com.yazzer.gestiondestock.validator.ArticleValidator;
 import com.yazzer.gestiondestock.validator.EntrepriseValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Transactional(rollbackOn = Exception.class)
 @Service
 @Slf4j
 public class EntrepriseServiceImpl implements EntrepriseService {
@@ -32,10 +36,12 @@ public class EntrepriseServiceImpl implements EntrepriseService {
     private EntrepriseRepository entrepriseRepository;
     private UtilisateurService utilisateurService;
     private RolesRepository rolesRepository;
+    
+    private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     public EntrepriseServiceImpl(
-            EntrepriseRepository entrepriseRepository) {
+            EntrepriseRepository entrepriseRepository, UtilisateurService utilisateurService, RolesRepository rolesRepository ) {
         this.entrepriseRepository = entrepriseRepository;
         this.utilisateurService = utilisateurService;
         this.rolesRepository = rolesRepository;
@@ -79,7 +85,8 @@ public class EntrepriseServiceImpl implements EntrepriseService {
     }
 
     private String generateRandomPassword(){
-        return "Yt#19#P@$$w0rD";
+    	String encodedPassword = encoder.encode("som3R@nd0mP@$$word");
+        return encodedPassword;
     }
 
     @Override

@@ -48,9 +48,10 @@ public class SwaggerConfiguration {
 
     private SecurityContext securityContext() {
         return SecurityContext.builder()
-                . securityReferences (defaultAuth())
+                .securityReferences (defaultAuth())
                 .build();
     }
+    
     List<SecurityReference> defaultAuth() {
 
     AuthorizationScope authorizationScope

@@ -1,5 +1,6 @@
 package com.yazzer.gestiondestock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yazzer.gestiondestock.model.Roles;
 import com.yazzer.gestiondestock.model.Utilisateur;
 import lombok.Builder;
@@ -13,9 +14,9 @@ public class RolesDto {
 
     private String roleName;
 
+    @JsonIgnore
     private UtilisateurDto utilisateur;
 
-    private Integer idEntreprise;
 
     public static RolesDto fromEntity(Roles roles) {
         if (roles == null) {
@@ -26,8 +27,7 @@ public class RolesDto {
         return RolesDto.builder()
                 .id (roles.getId())
                 .roleName (roles.getRoleName())
-                .utilisateur (UtilisateurDto.fromEntity(roles.getUtilisateur()))
-                .idEntreprise (roles.getIdEntreprise())
+//                .utilisateur (UtilisateurDto.fromEntity(roles.getUtilisateur()))
                 .build();
     }
     public static Roles toEntity (RolesDto rolesDto) {
@@ -39,7 +39,6 @@ public class RolesDto {
         Roles roles = new Roles();
         roles.setId(rolesDto.getId());
         roles.setRoleName(rolesDto.getRoleName());
-        roles.setIdEntreprise(rolesDto.getIdEntreprise());
         roles.setUtilisateur(UtilisateurDto.toEntity(rolesDto.getUtilisateur()));
         return roles;
     }

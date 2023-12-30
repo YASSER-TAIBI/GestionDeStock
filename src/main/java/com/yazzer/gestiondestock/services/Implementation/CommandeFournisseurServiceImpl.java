@@ -33,6 +33,7 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
     private FournisseurRepository fournisseurRepository;
     private ArticleRepository articleRepository;
     private LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository;
+    
     @Autowired
     public CommandeFournisseurServiceImpl(
             CommandeFournisseurRepository commandeFournisseurRepository,
@@ -45,9 +46,10 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         this.fournisseurRepository = fournisseurRepository;
         this.ligneCommandeFournisseurRepository = ligneCommandeFournisseurRepository;
     }
-//16:43 Partie 14
+
     @Override
     public CommandeFournisseurDto save(CommandeFournisseurDto dto) {
+    	
         List<String> errors = CommandeFournisseurValidator.validate(dto);
         if (!errors.isEmpty()) {
             log.error("Commande Fournisseur is not valide", dto);
@@ -79,8 +81,10 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
             throw new InvalidEntityException("Article n'existe pas dans la BDD", ErrorCodes.ARTICLE_NOT_FOUND, articleErrors);
         }
 
+     // Charger CommandeFournisseur --> DB
         CommandeFournisseur savedCmdFr = commandeFournisseurRepository.save(CommandeFournisseurDto.toEntity(dto));
-
+        
+     // Charger LigneCommandeFournisseurs --> DB
         if (dto.getLigneCommandeFournisseurs() != null) {
             dto.getLigneCommandeFournisseurs().forEach(ligCmdFr -> {
                 LigneCommandeFournisseur ligneCommandeFournisseur = LigneCommandeFournisseurDto.toEntity(ligCmdFr);

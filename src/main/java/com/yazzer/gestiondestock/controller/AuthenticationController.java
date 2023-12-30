@@ -36,11 +36,13 @@ public class AuthenticationController {
                         request.getPassword()
                 )
         );
+        
+       
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getLogin());
 
         final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
 
-        return  ResponseEntity.ok(AuthenticationResponse.builder().assessToken(jwt).build());
+        return ResponseEntity.ok(AuthenticationResponse.builder().assessToken(jwt).build());
     }
 
 }

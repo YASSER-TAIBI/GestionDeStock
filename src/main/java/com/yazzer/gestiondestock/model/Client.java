@@ -19,7 +19,7 @@ public class Client extends AbstractEntity {
     @Column(name = "prenom")
     private String prenom;
 
-    @Embedded
+    @Embedded // Ce champ est un champ composé, ce qui signifie qu’il peut être utilisé plusieurs fois dans d’autres entités
     private Adresse adresse;
 
     @Column(name = "photo")

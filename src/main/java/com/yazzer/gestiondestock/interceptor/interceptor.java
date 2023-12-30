@@ -9,7 +9,7 @@ public class interceptor extends EmptyInterceptor {
     @Override
     public String onPrepareStatement(String sql) {
         if (StringUtils.hasLength(sql) && sql.toLowerCase().startsWith("select")){
-            // select utilisateu@_.
+            // select utilisateu0_.
             final String entityName = sql.substring(7, sql.indexOf("."));
             final String idEntreprise = MDC.get("idEntreprise");
             if (StringUtils.hasLength (entityName)

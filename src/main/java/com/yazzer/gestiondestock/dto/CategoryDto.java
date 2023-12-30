@@ -22,6 +22,8 @@ public class CategoryDto {
     @JsonIgnore
     private List<ArticleDto> articles;
 
+    
+    // Ce méthode permet de faire un Mapping ( Category --> CategoryDto )
     public static CategoryDto fromEntity (Category category) {
         if (category == null) {
             return null;
@@ -35,6 +37,8 @@ public class CategoryDto {
                 .designation (category.getDesignation())
                 .build();
     }
+    
+ // Ce méthode permet de faire un Mapping ( CategoryDto --> Category )
     public static Category toEntity (CategoryDto categoryDto) {
         if (categoryDto == null) {
             return null;
