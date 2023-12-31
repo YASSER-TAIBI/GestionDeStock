@@ -1,6 +1,8 @@
 package com.yazzer.gestiondestock.dto;
 
 import com.yazzer.gestiondestock.model.CommandeClient;
+import com.yazzer.gestiondestock.model.EtatCommande;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,6 +18,8 @@ public class CommandeClientDto {
     private String code;
 
     private Instant dateCommande;
+
+    private EtatCommande etatCommande;
 
     private ClientDto client;
 
@@ -34,6 +38,7 @@ public class CommandeClientDto {
                 .id (commandeClient.getId())
                 .code (commandeClient.getCode())
                 .idEntreprise(commandeClient.getIdEntreprise())
+                .etatCommande(commandeClient.getEtatCommande())
                 .dateCommande (commandeClient.getDateCommande())
                 .client (ClientDto.fromEntity(commandeClient.getClient()))
                 .build();
@@ -47,9 +52,14 @@ public class CommandeClientDto {
         CommandeClient commandeClient = new CommandeClient();
         commandeClient.setId(commandeClientDto.getId());
         commandeClient.setCode(commandeClientDto.getCode());
+        commandeClient.setEtatCommande(commandeClientDto.getEtatCommande());
         commandeClient.setIdEntreprise(commandeClientDto.getIdEntreprise());
         commandeClient.setDateCommande(commandeClientDto.getDateCommande());
 
         return commandeClient;
     }
+
+    public boolean isCommandeLivree() {
+        return EtatCommande.LIVREE.equals(this.etatCommande);
+      }
 }

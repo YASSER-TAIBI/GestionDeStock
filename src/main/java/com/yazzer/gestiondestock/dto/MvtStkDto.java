@@ -2,6 +2,7 @@ package com.yazzer.gestiondestock.dto;
 
 import com.yazzer.gestiondestock.model.MvtStk;
 import com.yazzer.gestiondestock.model.Roles;
+import com.yazzer.gestiondestock.model.SourceMvtStk;
 import com.yazzer.gestiondestock.model.TypeMvtStk;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class MvtStkDto {
 
     private TypeMvtStk typeMvt;
 
+    private SourceMvtStk sourceMvt;
+
     private Integer idEntreprise;
 
 
@@ -37,6 +40,7 @@ public class MvtStkDto {
                 .dateMvt (mvtStk.getDateMvt())
                 .quantite (mvtStk.getQuantite())
                 .idEntreprise (mvtStk.getIdEntreprise())
+                .sourceMvt(mvtStk.getSourceMvt())
                 .article (ArticleDto.fromEntity(mvtStk.getArticle()))
 
                 .build();
@@ -51,6 +55,7 @@ public class MvtStkDto {
         mvtStk.setId(mvtStkDto.getId());
         mvtStk.setDateMvt(mvtStkDto.getDateMvt());
         mvtStk.setQuantite(mvtStkDto.getQuantite());
+        mvtStk.setTypeMvt(mvtStkDto.getTypeMvt());
         mvtStk.setIdEntreprise(mvtStkDto.getIdEntreprise());
         mvtStk.setArticle(ArticleDto.toEntity(mvtStkDto.getArticle()));
         return mvtStk;
