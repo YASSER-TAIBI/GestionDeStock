@@ -1,7 +1,6 @@
 package com.yazzer.gestiondestock.dto;
 
 import com.yazzer.gestiondestock.model.LigneCommandeClient;
-import com.yazzer.gestiondestock.model.Utilisateur;
 import lombok.Builder;
 import lombok.Data;
 

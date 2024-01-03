@@ -2,6 +2,7 @@ package com.yazzer.gestiondestock.controller;
 
 import com.yazzer.gestiondestock.controller.api.CommandeClientApi;
 import com.yazzer.gestiondestock.dto.CommandeClientDto;
+import com.yazzer.gestiondestock.dto.LigneCommandeClientDto;
 import com.yazzer.gestiondestock.model.EtatCommande;
 import com.yazzer.gestiondestock.services.CommandeClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class CommandeClientController implements CommandeClientApi {
     }
 
     @Override
+    public ResponseEntity<List<LigneCommandeClientDto>> findAllLignesCommandesClientByCommandeClientId(
+            Integer idCommande) {
+        return ResponseEntity.ok(commandeClientService.findAllLignesCommandesClientByCommandeClientId(idCommande));
+    }
+
+    @Override
     public ResponseEntity<Void> delete(Integer id) {
         commandeClientService.delete(id);
         return ResponseEntity.ok().build();
@@ -62,4 +69,16 @@ public class CommandeClientController implements CommandeClientApi {
     public ResponseEntity<CommandeClientDto> updateClient(Integer idCommande, Integer idClient) {
         return ResponseEntity.ok(commandeClientService.updateClient(idCommande, idClient));
     }
+
+    @Override
+    public ResponseEntity<CommandeClientDto> updateArticle(Integer idCommande, Integer idLigneCommande,
+            Integer idArticle) {
+        return ResponseEntity.ok(commandeClientService.updateArticle(idCommande, idLigneCommande, idArticle));
+    }
+
+    @Override
+    public ResponseEntity<CommandeClientDto> deleteArticle(Integer idCommande, Integer idLigneCommande) {
+        return ResponseEntity.ok(commandeClientService.deleteArticle(idCommande, idLigneCommande));
+    }
+
 }

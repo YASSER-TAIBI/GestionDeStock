@@ -21,6 +21,7 @@ public class CommandeFournisseurDto {
 
     private Integer idEntreprise;
 
+    @JsonIgnore
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs;
 
 

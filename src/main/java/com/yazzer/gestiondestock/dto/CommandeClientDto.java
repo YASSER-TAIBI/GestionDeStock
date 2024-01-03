@@ -1,5 +1,6 @@
 package com.yazzer.gestiondestock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yazzer.gestiondestock.model.CommandeClient;
 import com.yazzer.gestiondestock.model.EtatCommande;
 
@@ -25,6 +26,7 @@ public class CommandeClientDto {
 
     private Integer idEntreprise;
 
+    @JsonIgnore
     private List<LigneCommandeClientDto> ligneCommandeClients;
 
 

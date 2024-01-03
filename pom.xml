@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.11</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath /> <!-- cmd to start application: mvn spring-boot:run -->
 	</parent>
 	<groupId>com.yazzer</groupId>
 	<artifactId>gestiondestock</artifactId>
